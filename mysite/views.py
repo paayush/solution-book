@@ -11,14 +11,18 @@ def signin(request):
 
 def signup(request):
     
-    if request.method == "post":
-        uname = request.post["uname"]
-        email1 = request.post["email1"]
-        pass1 = request.post["pass1"]
-        pass2 = request.post["pass2"]
-        email2 = request.post["email2"]
+    if request.method == "POST":
+        username = request.POST["username"]
+        fname = request.POST["fname"]
+        lname = request.POST["lname"]
+        email = request.POST["email"]
+        pass1 = request.POST["pass1"]
+        pass2 = request.POST["pass2"]
         
-        myuser = User.objects.create_user(uname, email1, pass1)
+        myuser = User.objects.create_user(username, email, pass1)
+        myuser.first_name = fname
+        myuser.last_name = lname
+        
         myuser.save()
         
         messages.success(request, "you account has been created")
